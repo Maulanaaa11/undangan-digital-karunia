@@ -27,7 +27,164 @@
                   linear-gradient(180deg, var(--bg2), var(--bg1)) fixed;
       overflow-x:hidden;
     }
- .logos {
+    
+    /* Music Controls */
+    .music-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(15, 36, 54, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+    }
+    
+    .music-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      padding: 5px;
+    }
+    
+    .music-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .music-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .music-controls:hover .volume-control {
+      opacity: 1;
+      max-width: 120px;
+    }
+    
+    .volume-slider {
+      width: 80px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+    }
+    
+    .volume-slider::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: none;
+    }
+    
+    .music-info {
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 3px;
+    }
+    
+    /* Welcome Screen */
+    .welcome-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .welcome-screen.hidden {
+      opacity: 0;
+      transform: scale(1.1);
+      pointer-events: none;
+    }
+    
+    .welcome-content {
+      text-align: center;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      max-width: 500px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .welcome-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--accent);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .welcome-subtitle {
+      color: var(--muted);
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    
+    .enter-btn {
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      color: #222;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(255, 193, 102, 0.3);
+    }
+    
+    .enter-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(255, 193, 102, 0.4);
+    }
+    
+    .enter-btn:active {
+      transform: translateY(0);
+    }
+    
+    .logos {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -121,25 +278,61 @@
     @keyframes spin{to{transform:rotate(360deg)}}
 
     .salam {
-  padding: 20px;
-  background: #0a1a2f; /* biar nyatu sama tema */
-  border-radius: 12px;
+      padding: 20px;
+      background: #0a1a2f; /* biar nyatu sama tema */
+      border-radius: 12px;
     }
 
     .salam h2 {
-  color: #ffcc00;
-  margin-bottom: 12px;
-  text-transform: uppercase;
+      color: #ffcc00;
+      margin-bottom: 12px;
+      text-transform: uppercase;
     }
 
     .salam p {
-  text-align: justify;
-  line-height: 1.7;
-  font-size: 1rem;
+      text-align: justify;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+    
+    @media (max-width: 600px) {
+      .music-controls {
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+      }
+      
+      .welcome-content {
+        margin: 20px;
+        padding: 30px 20px;
+      }
+      
+      .welcome-title {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Welcome Screen -->
+  <div class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-content">
+      <div class="welcome-title">🕌 Assalamu'alaikum</div>
+      <p class="welcome-subtitle">Selamat datang di undangan digital Tabligh Akbar Maulid Nabi Muhammad SAW. Klik tombol di bawah untuk melanjutkan dan menyalakan musik.</p>
+      <button class="enter-btn" id="enterBtn">🎵 Masuk Undangan</button>
+    </div>
+  </div>
+
+  <!-- Music Controls -->
+  <div class="music-controls" id="musicControls">
+    <button class="music-btn" id="playPauseBtn" title="Play/Pause">▶️</button>
+    <div class="volume-control">
+      <span style="font-size: 14px;">🔊</span>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+    </div>
+    <div class="music-info">Qolbi Fil Madinah</div>
+  </div>
+
   <!-- Background Stars -->
   <div class="stars" id="stars"></div>
   <canvas id="confetti"></canvas>
@@ -147,11 +340,19 @@
   <!-- Preloader -->
   <div id="preloader"><div class="spinner"></div></div>
 
+  <!-- Audio Element -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="wwd.mp3juice.blog - QOLBI FIL MADINAH - Maher Zain Harris J Cover By Ai Khodijah (Lirik Musik) (192 KBps).mp3" type="audio/mpeg">
+    <!-- Backup audio sources -->
+    <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+    Browser Anda tidak mendukung pemutar audio.
+  </audio>
+
   <header class="fade-in">
      <div class="logos">
-    <img src="paud.png" alt="Logo 1">
-    <img src="yayasan.png" alt="Logo 2">
-    <img src="sdit.png" alt="Logo 3">
+    <img src="paud.png" alt="Logo 1" onerror="this.style.display='none'">
+    <img src="yayasan.png" alt="Logo 2" onerror="this.style.display='none'">
+    <img src="sdit.png" alt="Logo 3" onerror="this.style.display='none'">
     </div>
     <div class="badge">Undangan Digital</div>
     <h1 class="glow">Tabligh Akbar Maulid Nabi Muhammad SAW</h1>
@@ -160,13 +361,6 @@
     <p class="subtitle">Dengan memohon rahmat dan ridha Allah Subhanahu wa Ta'ala, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara Tabligh Akbar dalam rangka memperingati Maulid Nabi Muhammad SAW.</p>
   </header>
 
-   <div class="music-player">
-    <button id="playBtn">🎵 Putar Musik</button>
-    <audio id="bgMusic" loop>
-      <source src="wwd.mp3juice.blog - QOLBI FIL MADINAH - Maher Zain Harris J Cover By Ai Khodijah (Lirik Musik) (192 KBps).mp3" type="audio/mpeg">
-      Browser tidak mendukung audio.
-    </audio>
-  </div>
   <main class="container">
     <div class="card grid fade-in-2">
       <!-- Foto Penceramah / Poster -->
@@ -193,7 +387,7 @@
             <div class="icon">📍</div>
             <div>
               <div><strong>Lokasi</strong></div>
-              <div>Jln Puskesmas Rawat Inap Katibung Dusun Wonodadi Desa Pardasuka Kec. Katibung Kab. Lampung Selatan</div>
+              <div>Jln Puskesmas Rawat Inap Katibung Dusun Wonodadi Desa Pardasuka Kec. Katibung Kab. Lampung Selatan</div>
             </div>
           </div>
         </div>
@@ -217,18 +411,13 @@
 
     <div class="foot fade-in-3" style="margin-top:18px">
       <div class="salam">
-        <p class="section-title">Salam Pembuka
-        </p>
-        <p>Assalamu'alaikum warahmatullahi wabarakatuh.
-        </p>
-        <p>Segala puji bagi Allah Subhanahu wa Ta’ala yang telah melimpahkan rahmat, taufik, dan hidayah-Nya kepada kita semua. Shalawat serta salam semoga senantiasa tercurah kepada junjungan kita Nabi Muhammad Shallallahu ‘alaihi wasallam, suri teladan sepanjang zaman. Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Tabligh Akbar dalam rangka memperingati Maulid Nabi Muhammad SAW yang insyaAllah akan dilaksanakan di Gedung KB.SDIT Karunia, Jl. Puskesmas Rawat Inap Wonodadi Pardasuka pada:</p>
-            <p>📅 Sabtu, 6 September 2025</p>
-            <p>🕢 Pukul 07.30 WIB s/d selesai</p>
-            <p>Dengan tema:
-            "Meneladani Akhlak Nabi Muhammad SAW sebagai Landasan Pembentukan Karakter Anak"
-        </p>
-        <p>Wassalamu'alaikum warahmatullahi wabarakatuh.
-        </p>
+        <p class="section-title">Salam Pembuka</p>
+        <p>Assalamu'alaikum warahmatullahi wabarakatuh.</p>
+        <p>Segala puji bagi Allah Subhanahu wa Ta'ala yang telah melimpahkan rahmat, taufik, dan hidayah-Nya kepada kita semua. Shalawat serta salam semoga senantiasa tercurah kepada junjungan kita Nabi Muhammad Shallallahu 'alaihi wasallam, suri teladan sepanjang zaman. Dengan penuh rasa syukur, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri Tabligh Akbar dalam rangka memperingati Maulid Nabi Muhammad SAW yang insyaAllah akan dilaksanakan di Gedung KB.SDIT Karunia, Jl. Puskesmas Rawat Inap Wonodadi Pardasuka pada:</p>
+        <p>📅 Sabtu, 6 September 2025</p>
+        <p>🕢 Pukul 07.30 WIB s/d selesai</p>
+        <p>Dengan tema: "Meneladani Akhlak Nabi Muhammad SAW sebagai Landasan Pembentukan Karakter Anak"</p>
+        <p>Wassalamu'alaikum warahmatullahi wabarakatuh.</p>
       </div>
       <div class="dua">
         <p class="section-title">Catatan</p>
@@ -243,6 +432,143 @@
   </main>
 
   <script>
+    // Audio Management Class
+    class AudioManager {
+      constructor() {
+        this.audio = document.getElementById('bgMusic');
+        this.playPauseBtn = document.getElementById('playPauseBtn');
+        this.volumeSlider = document.getElementById('volumeSlider');
+        this.musicControls = document.getElementById('musicControls');
+        this.isPlaying = false;
+        this.hasStarted = false;
+        
+        this.init();
+      }
+      
+      init() {
+        // Set initial volume
+        this.audio.volume = 0.7;
+        
+        // Event listeners
+        this.playPauseBtn.addEventListener('click', () => this.togglePlayPause());
+        this.volumeSlider.addEventListener('input', (e) => this.setVolume(e.target.value));
+        
+        // Audio events
+        this.audio.addEventListener('play', () => this.onPlay());
+        this.audio.addEventListener('pause', () => this.onPause());
+        this.audio.addEventListener('ended', () => this.onEnded());
+        this.audio.addEventListener('loadstart', () => console.log('Loading audio...'));
+        this.audio.addEventListener('canplaythrough', () => console.log('Audio ready to play'));
+        this.audio.addEventListener('error', (e) => this.onError(e));
+      }
+      
+      async play() {
+        try {
+          await this.audio.play();
+          this.isPlaying = true;
+          this.hasStarted = true;
+          this.playPauseBtn.textContent = '⏸️';
+          this.playPauseBtn.title = 'Pause';
+        } catch (error) {
+          console.log('Could not play audio:', error);
+          this.showAudioError();
+        }
+      }
+      
+      pause() {
+        this.audio.pause();
+        this.isPlaying = false;
+        this.playPauseBtn.textContent = '▶️';
+        this.playPauseBtn.title = 'Play';
+      }
+      
+      togglePlayPause() {
+        if (this.isPlaying) {
+          this.pause();
+        } else {
+          this.play();
+        }
+      }
+      
+      setVolume(value) {
+        this.audio.volume = value / 100;
+      }
+      
+      onPlay() {
+        this.isPlaying = true;
+        this.playPauseBtn.textContent = '⏸️';
+      }
+      
+      onPause() {
+        this.isPlaying = false;
+        this.playPauseBtn.textContent = '▶️';
+      }
+      
+      onEnded() {
+        this.isPlaying = false;
+        this.playPauseBtn.textContent = '▶️';
+        // Auto replay for looped audio
+        setTimeout(() => this.play(), 1000);
+      }
+      
+      onError(e) {
+        console.error('Audio error:', e);
+        this.showAudioError();
+      }
+      
+      showAudioError() {
+        const musicInfo = document.querySelector('.music-info');
+        if (musicInfo) {
+          musicInfo.textContent = 'Audio tidak tersedia';
+          musicInfo.style.color = '#ff6b6b';
+        }
+      }
+    }
+
+    // Welcome Screen Manager
+    class WelcomeManager {
+      constructor(audioManager) {
+        this.audioManager = audioManager;
+        this.welcomeScreen = document.getElementById('welcomeScreen');
+        this.enterBtn = document.getElementById('enterBtn');
+        this.hasEntered = false;
+        
+        this.init();
+      }
+      
+      init() {
+        this.enterBtn.addEventListener('click', () => this.enterInvitation());
+        
+        // Hide music controls initially
+        document.getElementById('musicControls').style.display = 'none';
+      }
+      
+      async enterInvitation() {
+        if (this.hasEntered) return;
+        this.hasEntered = true;
+        
+        // Add entrance animation
+        this.enterBtn.style.transform = 'scale(0.95)';
+        this.enterBtn.textContent = '🎵 Memulai...';
+        
+        setTimeout(async () => {
+          // Hide welcome screen
+          this.welcomeScreen.classList.add('hidden');
+          
+          // Show music controls
+          document.getElementById('musicControls').style.display = 'flex';
+          
+          // Start audio
+          await this.audioManager.play();
+          
+          // Remove welcome screen after animation
+          setTimeout(() => {
+            this.welcomeScreen.style.display = 'none';
+          }, 800);
+        }, 300);
+      }
+    }
+
     // Helper: format to Google Calendar link
     function toGCal({title, details, location, startISO, endISO}){
       const base = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
@@ -256,13 +582,33 @@
       return `${base}&${params.toString()}`;
     }
 
-    // Preloader remove after ready
-    window.addEventListener('load', ()=>{
-      setTimeout(()=> document.getElementById('preloader').style.display='none', 300);
+    // Initialize everything when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize audio and welcome managers
+      const audioManager = new AudioManager();
+      const welcomeManager = new WelcomeManager(audioManager);
+      
+      // Remove preloader
+      setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+          preloader.style.display = 'none';
+        }
+      }, 300);
+      
+      // Generate decorative stars
+      makeStars();
+      
+      // Initialize countdown
+      initCountdown();
+      
+      // Initialize other features
+      initShareButton();
+      initCalendarButton();
     });
 
     // Decorative Stars generation
-    (function makeStars(){
+    function makeStars(){
       const wrap = document.getElementById('stars');
       const count = 120; // number of stars
       for(let i=0;i<count;i++){
@@ -276,10 +622,10 @@
         s.style.transform = `scale(${size})`;
         wrap.appendChild(s);
       }
-    })();
+    }
 
     // Countdown Logic + Confetti Day
-    (function countdown(){
+    function initCountdown(){
       const box = document.getElementById('countdown');
       const eventISO = box.dataset.eventtime; // customize date here
       const eventTime = new Date(eventISO).getTime();
@@ -304,36 +650,38 @@
         }
       }
       const timer = setInterval(tick, 1000); tick();
-    })();
+    }
 
     // Share Button
-    document.getElementById('shareBtn').addEventListener('click', async ()=>{
-      const title = 'Tabligh Akbar Maulid Nabi Muhammad SAW';
-      const text = 'Ayo hadir dalam Tabligh Akbar: Tema "Meneladani Akhlak Rasulullah". Waktu & lokasi ada di undangan.';
-      const url  = location.href;
-      if(navigator.share){
-        try{ await navigator.share({title, text, url}); }catch(e){}
-      }else{
-        const wa = `https://wa.me/?text=${encodeURIComponent(`${title}%0A${text}%0A${url}`)}`;
-        window.open(wa, '_blank');
-      }
-    });
+    function initShareButton(){
+      document.getElementById('shareBtn').addEventListener('click', async ()=>{
+        const title = 'Tabligh Akbar Maulid Nabi Muhammad SAW';
+        const text = 'Ayo hadir dalam Tabligh Akbar: Tema "Meneladani Akhlak Rasulullah". Waktu & lokasi ada di undangan.';
+        const url  = location.href;
+        if(navigator.share){
+          try{ await navigator.share({title, text, url}); }catch(e){}
+        }else{
+          const wa = `https://wa.me/?text=${encodeURIComponent(`${title}%0A${text}%0A${url}`)}`;
+          window.open(wa, '_blank');
+        }
+      });
+    }
 
     // Calendar Button
-    (function cal(){
+    function initCalendarButton(){
       const box = document.getElementById('countdown');
       const start = new Date(box.dataset.eventtime);
       const end = new Date(start.getTime() + 2*60*60*1000); // default duration 2 hours
       const link = toGCal({
         title: 'Tabligh Akbar Maulid Nabi Muhammad SAW',
-        details: 'Tema: Meneladani Akhlak Rasulullah dalam Kehidupan Sehari-hari',
-        location: 'Masjid Al-Ikhlas, Jl. Contoh No. 123, Bandar Lampung',
+        details: 'Tema: "Meneladani Akhlak Nabi Muhammad SAW Sebagai Landasan Pembentukan Karakter Anak" - diisi oleh Ustadz Dr. H. Firmansyah,M.Pd',
+        location: 'Jln Puskesmas Rawat Inap Katibung Dusun Wonodadi Desa Pardasuka Kec. Katibung Kab. Lampung Selatan',
         startISO: start.toISOString(),
         endISO: end.toISOString()
       });
       const a = document.getElementById('saveCal');
       a.href = link;
-    })();
+    }
 
     // Simple confetti animation (no library)
     function celebrate(){
@@ -368,16 +716,81 @@
         if(t - start > 7000){ running = false; ctx.clearRect(0,0,w,h); }
       })();
     }
-    const playBtn = document.getElementById("playBtn");
-    const bgMusic = document.getElementById("bgMusic");
-    playBtn.addEventListener("click", () => {
-      if(bgMusic.paused){
-        bgMusic.play();
-        playBtn.textContent = "⏸️ Pause Musik";
-      }else{
-        bgMusic.pause();
-        playBtn.textContent = "🎵 Putar Musik";
+
+    // Handle page visibility change (pause music when tab is not active)
+    document.addEventListener('visibilitychange', () => {
+      const audioManager = window.audioManager;
+      if (audioManager && audioManager.hasStarted) {
+        if (document.hidden) {
+          if (audioManager.isPlaying) {
+            audioManager.wasPlayingBeforeHidden = true;
+            audioManager.pause();
+          }
+        } else {
+          if (audioManager.wasPlayingBeforeHidden) {
+            audioManager.play();
+            audioManager.wasPlayingBeforeHidden = false;
+          }
+        }
       }
+    });
+
+    // Handle audio interruption (phone calls, other apps)
+    window.addEventListener('blur', () => {
+      const audioManager = window.audioManager;
+      if (audioManager && audioManager.isPlaying) {
+        audioManager.wasPlayingBeforeBlur = true;
+        audioManager.pause();
+      }
+    });
+
+    window.addEventListener('focus', () => {
+      const audioManager = window.audioManager;
+      if (audioManager && audioManager.wasPlayingBeforeBlur) {
+        setTimeout(() => {
+          audioManager.play();
+          audioManager.wasPlayingBeforeBlur = false;
+        }, 500);
+      }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      const audioManager = window.audioManager;
+      if (!audioManager || !audioManager.hasStarted) return;
+      
+      switch(e.code) {
+        case 'Space':
+          e.preventDefault();
+          audioManager.togglePlayPause();
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          const currentVolume = audioManager.audio.volume * 100;
+          const newVolumeUp = Math.min(100, currentVolume + 10);
+          audioManager.setVolume(newVolumeUp);
+          document.getElementById('volumeSlider').value = newVolumeUp;
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          const currentVolumeDown = audioManager.audio.volume * 100;
+          const newVolumeDown = Math.max(0, currentVolumeDown - 10);
+          audioManager.setVolume(newVolumeDown);
+          document.getElementById('volumeSlider').value = newVolumeDown;
+          break;
+      }
+    });
+
+    // Smooth scroll for better mobile experience
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Handle online/offline status
+    window.addEventListener('online', () => {
+      console.log('Connection restored');
+    });
+
+    window.addEventListener('offline', () => {
+      console.log('Connection lost');
     });
   </script>
 </body>
