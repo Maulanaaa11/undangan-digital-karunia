@@ -160,6 +160,13 @@
     <p class="subtitle">Dengan memohon rahmat dan ridha Allah Subhanahu wa Ta'ala, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara Tabligh Akbar dalam rangka memperingati Maulid Nabi Muhammad SAW.</p>
   </header>
 
+   <div class="music-player">
+    <button id="playBtn">🎵 Putar Musik</button>
+    <audio id="bgMusic" loop>
+      <source src="wwd.mp3juice.blog - QOLBI FIL MADINAH - Maher Zain Harris J Cover By Ai Khodijah (Lirik Musik) (192 KBps).mp3" type="audio/mpeg">
+      Browser tidak mendukung audio.
+    </audio>
+  </div>
   <main class="container">
     <div class="card grid fade-in-2">
       <!-- Foto Penceramah / Poster -->
@@ -361,6 +368,17 @@
         if(t - start > 7000){ running = false; ctx.clearRect(0,0,w,h); }
       })();
     }
+    const playBtn = document.getElementById("playBtn");
+    const bgMusic = document.getElementById("bgMusic");
+    playBtn.addEventListener("click", () => {
+      if(bgMusic.paused){
+        bgMusic.play();
+        playBtn.textContent = "⏸️ Pause Musik";
+      }else{
+        bgMusic.pause();
+        playBtn.textContent = "🎵 Putar Musik";
+      }
+    });
   </script>
 </body>
 </html>
